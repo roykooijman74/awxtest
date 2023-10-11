@@ -1,5 +1,6 @@
 - name: Get hostname
-    shell: echo $HOSTNAME
-    register: result
+  shell: echo {{ ansible_hostname }}
+  register: result
+
 - debug:
     var: result
