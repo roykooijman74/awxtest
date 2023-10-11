@@ -1,5 +1,5 @@
 ---
-- hosts: all
+- hosts: your_target_hosts
   tasks:
     - name: Get hostname
       shell: echo $HOSTNAME
@@ -7,9 +7,3 @@
 
     - debug:
         var: result
-
-  shell: echo {{ ansible_hostname }}
-  register: result
-
-- debug:
-    var: result
