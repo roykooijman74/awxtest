@@ -1,3 +1,5 @@
+# gethostname.yml
+---
 - name: Get hostname
   shell: echo {{ ansible_hostname }}
   register: result
