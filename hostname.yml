@@ -9,3 +9,9 @@
         var: result
     - set_fact:
         my_custom_fact: "{{ result.stdout }}"
+
+
+- hosts: all
+  tasks:
+    - debug:
+        var: my_custom_fact
