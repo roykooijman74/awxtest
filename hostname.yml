@@ -1,5 +1,5 @@
 ---
-- hosts: your_target_hosts
+- hosts: all
   tasks:
     - name: Get hostname
       shell: echo $HOSTNAME
