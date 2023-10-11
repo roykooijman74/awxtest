@@ -1,7 +1,13 @@
-# gethostname.yml
 ---
-- name: Get hostname
-  hosts: all
+- hosts: all
+  tasks:
+    - name: Get hostname
+      shell: echo $HOSTNAME
+      register: result
+
+    - debug:
+        var: result
+
   shell: echo {{ ansible_hostname }}
   register: result
 
