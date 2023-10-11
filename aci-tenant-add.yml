@@ -1,6 +1,8 @@
-- name: CREATE ACI TENANT 
-  aci_tenant:
-    tenant: "TESTT"
-    use_ssl: yes
-    validate_certs: false
-    state: "present"
+- hosts: all
+  tasks:
+    - name: CREATE ACI TENANT 
+      aci_tenant:
+        tenant: "TESTT"
+        use_ssl: yes
+        validate_certs: false
+        state: "present"
