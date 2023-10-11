@@ -1,0 +1,5 @@
+---
+- hosts: all
+  tasks:
+    - debug:
+        var: my_custom_fact
