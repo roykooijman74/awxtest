@@ -1,0 +1,5 @@
+- name: Get hostname
+    shell: echo $HOSTNAME
+    register: result
+- debug:
+    var: result
