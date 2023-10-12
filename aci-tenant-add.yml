@@ -3,26 +3,28 @@
     - name: CREATE ACI TENANT 
       aci_tenant:
         hostname: 192.168.1.240
+        use_ssl: yes
+        validate_certs: false
         username: admin
         password: password1234
         tenant: "Test1"
         description: "test2"
-        use_ssl: yes
-        validate_certs: false
         state: "present"
     - name: CREATE ACI TENANT 
       aci_tenant:
         hostname: 192.168.1.240
+        use_ssl: yes
+        validate_certs: false
         username: admin
         password: password1234
         tenant: "Test2"
         description: "test2"
-        use_ssl: yes
-        validate_certs: false
         state: "absent"
     - name: Query all tenants
       aci_tenant:
         hostname: 192.168.1.240
+        use_ssl: yes
+        validate_certs: false
         username: admin
         password: password1234
         state: query
