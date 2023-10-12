@@ -1,0 +1,18 @@
+- hosts: aci
+  tasks:
+    - name: CREATE ACI TENANT 
+      aci_tenant:
+        hostname: 192.168.1.240
+        use_ssl: yes
+        validate_certs: false
+        tenant: "Test1"
+        description: "test2"
+        state: "present"
+    - name: CREATE ACI TENANT 
+      aci_tenant:
+        hostname: 192.168.1.240
+        use_ssl: yes
+        validate_certs: false
+        tenant: "Test2"
+        description: "test2"
+        state: "absent"
