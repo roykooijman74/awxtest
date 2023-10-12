@@ -2,18 +2,17 @@
 
 - name: Create ACI Tenant
   hosts: "aci"  # Referring to the host created in the inventory
+  use_ssl: yes
+  validate_certs: false
+  username: "{{ ansible_user }}"
+  password: "{{ ansible_password }}"
   gather_facts: no  # You may or may not need facts.
 
   tasks:
     - name: Create ACI Tenant Test3
       aci_tenant:
         host: "{{ ansible_host }}"
-        use_ssl: yes
-        validate_certs: false
-
-        username: "{{ ansible_user }}"
-        password: "{{ ansible_password }}"
-        tenant: Test3
+        tenant: Test4
       register: result
 
     - name: Display the result
