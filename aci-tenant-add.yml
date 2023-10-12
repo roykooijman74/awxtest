@@ -5,17 +5,17 @@
         hostname: 192.168.1.240
         username: admin
         password: password1234
-        tenant: "TESTT"
+        tenant: "Test1"
         description: "test2"
         use_ssl: yes
         validate_certs: false
-        state: "absent"
+        state: "present"
     - name: CREATE ACI TENANT 
       aci_tenant:
         hostname: 192.168.1.240
         username: admin
         password: password1234
-        tenant: "TEST2"
+        tenant: "Test2"
         description: "test2"
         use_ssl: yes
         validate_certs: false
