@@ -2,11 +2,11 @@
   tasks:
     - name: CREATE ACI TENANT 
       aci_tenant:
-        hostname: royapic1
+        hostname: apic
         username: admin
         password: password1234
-        tenant: "TESTT"
-        description: "test1"
+        tenant: "TEST2"
+        description: "test2"
         use_ssl: yes
         validate_certs: false
         state: "present"
