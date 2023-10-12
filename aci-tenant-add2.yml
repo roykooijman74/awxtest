@@ -15,7 +15,7 @@
         tenant: Test3
         description: "Test tenant 3"
 #        nameAlias: "3e test"
-        state: "Present"
+        state: "present"
       register: result3
 
     - name: Create ACI Tenant Test4
