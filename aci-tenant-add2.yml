@@ -13,7 +13,10 @@
         username: "{{ ansible_user }}"
         password: "{{ ansible_password }}"
         tenant: Test3
-      register: result2
+        description: "Test tenant 3"
+        nameAlias: "3e test"
+        state: "Present"
+      register: result3
 
     - name: Create ACI Tenant Test4
       aci_tenant:
@@ -24,6 +27,7 @@
         username: "{{ ansible_user }}"
         password: "{{ ansible_password }}"
         tenant: Test4
+        state: "absent"
       register: result4
 
     - name: Display the result 3
