@@ -14,7 +14,7 @@
         password: "{{ ansible_password }}"
         tenant: Test3
         description: "Test tenant 3"
-        nameAlias: "3e test"
+#        nameAlias: "3e test"
         state: "Present"
       register: result3
 
