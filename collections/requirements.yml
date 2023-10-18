@@ -1,1 +1,3 @@
-cisco.aci
+collections:
+#- name: cisco.aci
+#  source: https://galaxy.ansible.com
