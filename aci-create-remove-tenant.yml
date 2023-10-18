@@ -13,6 +13,7 @@
         password: "{{ ansible_password }}"
         tenant: "{{ tenant_name }}"
         description: "{{ tenant_description }}"
+        nameAlias: "whatever"
         state: "{{ tenant_action }}"
       register: result
 
