@@ -1,3 +1,2 @@
 collections:
-  #- name: cisco.aci
-  - name: cisco.aci.aci_tenant
+ - name: cisco.aci.aci_tenant
