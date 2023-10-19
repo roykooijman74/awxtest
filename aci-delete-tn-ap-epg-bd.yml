@@ -71,7 +71,7 @@
         epg: "{{ item.name }}"
         state: "{{ state }}"
       with_items: "{{ epg_list.results }}"
-      when: state == "absent" and item.name != "{{ epg_name }}"
+      when: item.name != "{{ epg_name }}"
 
     - name: Display the result
       debug:
