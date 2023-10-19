@@ -44,40 +44,10 @@
         username: "{{ ansible_user }}"
         password: "{{ ansible_password }}"
         tenant: "{{ tenant_name }}"
-        bd: "{{ bd_name }}"                     #          "acc_#####_naam_xtr_yyy_dc1",
-        description: "{{ description }}"        #        "descr": "apm-id:####,alias:AAAA",
+        bd: "{{ bd_name }}"
+        description: "{{ description }}"
         state: "{{ action }}"
-#        annotation": "",
-#        nameAlias": "XXXX",
-
-
-        arp_flooding: "no"                      #        "arpFlood": "no",
-#        bd_type": "ethernet"                   ###niet in ACI json   #        "type": "regular",???
-
-        enable_multicast: false                 #        "mcastAllow": "no",
-        endpoint_clear: false                   #        "epClear": "no",
-        endpoint_move_detect: default           #        "epMoveDetectMode": "",
-        enable_routing : true                   #        "unicastRoute": "yes",
-                                                #        "hostBasedRouting": "no",
-        ip_learning: true                       #        "ipLearning": "yes",
-        ipv6_l3_unknown_multicast : "flood"     #        "v6unkMcastAct": "flood",
-        l2_unknown_unicast : "proxy"            #        "unkMacUcastAct": "proxy",
-        l3_unknown_multicast: "flood"           #        "unkMcastAct": "flood",
-        limit_ip_learn : true                   #        "limitIpLearnToSubnets": "yes",
-#        mac_addres                             #        "mac": "00:22:BD:F8:19:FF",## The APIC defaults to 00:22:BD:F8:19:FF when unset during creation.
-        multi_dest: "bd-flood"                  #        "multiDstPktAct": "bd-flood",
-        vrf: "tenand_id_dc>"                    #       child fvRsCtx
-                                                        #"fvRsCtx": {
-                                                        #  "attributes": {
-                                                        #       "annotation": "",
-                                                        #       "tnFvCtxName": "198_tcn"
-                                                #        "ownerKey": "",
-                                                #        "ownerTag": "",
-                                                #        "intersiteBumTrafficAllow": "no",
-                                                #        "intersiteL2Stretch": "no",
-                                                #        "ipv6McastAllow": "no",
-                                                #        "llAddr": "::",
-                                                #        "vmac": "not-applicable"      register: result
+      register: result
       
     - name: Display the result
       debug:

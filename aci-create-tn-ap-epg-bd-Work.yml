@@ -13,6 +13,8 @@
         password: "{{ ansible_password }}"
         tenant: "{{ tenant_name }}"
         description: "{{ description }}"
+        #					"nameAlias": "apps",
+
         state: "{{ action }}"
       register: result
 
@@ -29,12 +31,16 @@
         password: "{{ ansible_password }}"
         tenant: "{{ tenant_name }}"
         ap: "{{ ap_name }}"
-        description: "{{ description }}"
+        description: "{{ description }}"           # "apm-id:####,alias:AAAA"
+#2.7.0		"annotation": "",
+#2.7.0      "nameAlias":                            "alias applicatienaam",
         state: "{{ action }}"
       register: result
     - name: Display the result
       debug:
         var: result
+        
+        
 
     - name: Create BD
       aci_bd:
@@ -77,11 +83,23 @@
                                                 #        "intersiteL2Stretch": "no",
                                                 #        "ipv6McastAllow": "no",
                                                 #        "llAddr": "::",
-                                                #        "vmac": "not-applicable"      register: result
-      
+                                                #        "vmac": "not-applicable"
+							},
+
+      register: result
+    
     - name: Display the result
       debug:
         var: result
+
+									"fvRsBDToOut": {
+										"attributes": {
+											"annotation": "",
+											"tnL3extOutName": "l3out_198_tcn"
+										}
+									}
+								},
+
 
     - name: Create BD Subnet
       aci_bd_subnet:
@@ -97,6 +115,20 @@
         description: "{{ description }}"
         state: "{{ action }}"
       register: result
+
+									"fvSubnet": {
+										"attributes": {
+											"annotation": "",
+											"ctrl": "",
+											"descr": "apm-id:6091,alias:mitel",
+											"ip": "10.79.64.193/29",
+											"name": "exs_50175_ovoc_dtr_app_tcn",
+											"nameAlias": "mitel",
+											"preferred": "no",
+											"scope": "public,shared",
+											"virtual": "no"
+										}
+
       
     - name: Display the result
       debug:
@@ -118,6 +150,27 @@
         preferred_group: true
         state: "{{ action }}"
       register: result
+
+
+									"fvAEPg": {
+										"attributes": {
+											"annotation": "",
+											"descr": "apm-id:4281,alias:dictu-topdesk",
+											"exceptionTag": "",
+											"floodOnEncap": "disabled",
+											"fwdCtrl": "",
+											"hasMcastSource": "no",
+											"isAttrBasedEPg": "no",
+											"matchT": "AtleastOne",
+											"name": "topdesk-ent_dtr_app_odcn",
+											"nameAlias": "dictu-topdesk",
+											"pcEnfPref": "unenforced",
+											"prefGrMemb": "exclude",
+											"prio": "unspecified",
+											"shutdown": "no"
+										},
+
+
 
     - name: Display the result
       debug:
@@ -141,6 +194,66 @@
         state: "{{ action }}"
       register: result
 
+												"fvRsDomAtt": {
+													"attributes": {
+														"annotation": "",
+														"bindingType": "none",
+														"classPref": "encap",
+														"customEpgName": "",
+														"delimiter": "",
+														"encap": "unknown",
+														"encapMode": "auto",
+														"epgCos": "Cos0",
+														"epgCosPref": "disabled",
+														"instrImedcy": "lazy",
+														"lagPolicyName": "",
+														"netflowDir": "both",
+														"netflowPref": "disabled",
+														"numPorts": "0",
+														"portAllocation": "none",
+														"primaryEncap": "unknown",
+														"primaryEncapInner": "unknown",
+														"resImedcy": "pre-provision",
+														"secondaryEncapInner": "unknown",
+														"switchingMode": "native",
+														"tDn": "uni/vmmp-VMware/dom-INFRA_TOOLING_STRETCHED01",
+														"untagged": "no",
+														"vnetOnly": "no"
+													}
+
+
     - name: Display the result
       debug:
         var: result
+
+
+
+
+
+						"l3extOut": {
+							"attributes": {
+								"annotation": "",
+								"descr": "",
+								"enforceRtctrl": "export",
+								"name": "l3out_198_odcn",
+								"nameAlias": "",
+								"ownerKey": "",
+								"ownerTag": "",
+								"targetDscp": "unspecified"
+							},
+                            
+                            
+                            
+                            						"fvCtx": {
+							"attributes": {
+								"annotation": "",
+								"bdEnforcedEnable": "no",
+								"descr": "",
+								"ipDataPlaneLearning": "enabled",
+								"knwMcastAct": "permit",
+								"name": "198_odcn",
+								"nameAlias": "apps",
+								"ownerKey": "",
+								"ownerTag": "",
+								"pcEnfDir": "ingress",
+								"pcEnfPref": "enforced"
