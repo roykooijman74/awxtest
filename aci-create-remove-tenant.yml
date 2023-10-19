@@ -9,6 +9,7 @@
         host: "{{ ansible_host }}"
         use_ssl: yes
         validate_certs: false
+        annotation: "orchestration: ansible"
         username: "{{ ansible_user }}"
         password: "{{ ansible_password }}"
         tenant: "{{ tenant_name }}"
