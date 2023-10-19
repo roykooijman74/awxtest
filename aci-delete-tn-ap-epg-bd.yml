@@ -1,5 +1,5 @@
 ---
-- name: Remove ACI EPG
+- name: Remove ACI EPGs and APs
   hosts: "aci"
   gather_facts: no
   vars:
@@ -23,8 +23,8 @@
       debug:
         var: epg_result
 
-    - name: Check if the Application Profile is empty
-      aci_ap:
+    - name: Get a list of EPGs in the Application Profile
+      aci_epg:
         host: "{{ ansible_host }}"
         use_ssl: yes
         validate_certs: false
@@ -32,11 +32,32 @@
         password: "{{ ansible_password }}"
         tenant: "{{ tenant_name }}"
         ap: "{{ ap_name }}"
-      register: ap_result
+      register: epg_list
       ignore_errors: yes
 
-    - name: Remove Application Profile if it's empty
-      when: ap_result is succeeded
+    - name: Display the result
+      debug:
+        var: epg_list
+
+    - name: Remove other EPGs in the Application Profile (if any)
+      aci_epg:
+        host: "{{ ansible_host }}"
+        use_ssl: yes
+        validate_certs: false
+        username: "{{ ansible_user }}"
+        password: "{{ ansible_password }}"
+        tenant: "{{ tenant_name }}"
+        ap: "{{ ap_name }}"
+        epg: "{{ item.name }}"
+        state: "{{ state }}"
+      with_items: "{{ epg_list.results }}"
+      when: state == "absent" and item.name != "{{ epg_name }}"
+
+    - name: Display the result
+      debug:
+        var: epg_result
+
+    - name: Remove AP if no other EPGs left
       aci_ap:
         host: "{{ ansible_host }}"
         use_ssl: yes
@@ -46,11 +67,11 @@
         tenant: "{{ tenant_name }}"
         ap: "{{ ap_name }}"
         state: "{{ state }}"
-      register: ap_removal_result
+      when: epg_list.results | selectattr('state', 'eq', 'absent') | list | length == 0
 
     - name: Display the result
       debug:
-        var: ap_removal_result
+        var: ap_result
 
     - name: Remove BD
       aci_bd:
