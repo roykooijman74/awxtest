@@ -107,6 +107,7 @@
         domain_type: vmm
         vm_provider : vmware
         resolution_immediacy: immediate
+        deploy_immediacy : immediate
         state: "{{ action }}"
       register: result
 
