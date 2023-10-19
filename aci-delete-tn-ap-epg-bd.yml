@@ -2,8 +2,6 @@
 - name: Remove ACI EPG
   hosts: "aci"
   gather_facts: no
-  vars:
-    state: absent  # Set the state variable to "absent" or "present" as needed
 
   tasks:
     - name: Remove EPG
@@ -16,7 +14,7 @@
         tenant: "{{ tenant_name }}"
         ap: "{{ ap_name }}"
         epg: "{{ epg_name }}"
-        state: "{{ state }}"
+        state: absent
       register: epg_result
 
     - name: Display the result
@@ -45,7 +43,7 @@
         password: "{{ ansible_password }}"
         tenant: "{{ tenant_name }}"
         ap: "{{ ap_name }}"
-        state: "{{ state }}"
+        state: absent
       register: ap_removal_result
 
     - name: Display the result
@@ -61,7 +59,7 @@
         password: "{{ ansible_password }}"
         tenant: "{{ tenant_name }}"
         bd: "{{ bd_name }}"
-        state: "{{ state }}"
+        state: absent
       register: bd_result
 
     - name: Display the result
