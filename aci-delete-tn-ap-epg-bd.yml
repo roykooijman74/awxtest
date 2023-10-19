@@ -61,7 +61,7 @@
 
     - name: Count child EPGs in the registered list
       set_fact:
-        child_epgs_count: "{{ epg_list.results | list | length }}"
+        child_epgs_count: "{{ epg_list.results | selectattr('state', 'eq', 'absent') | list | length }}"
 
     - name: Display child EPGs count
       debug:
