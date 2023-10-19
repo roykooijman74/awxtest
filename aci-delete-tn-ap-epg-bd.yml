@@ -34,6 +34,7 @@
         ap: "{{ ap_name }}"
       register: epg_list
       ignore_errors: yes
+      when: epg_result.changed  # Check if the specific EPG was removed
 
     - name: Display the result
       debug:
