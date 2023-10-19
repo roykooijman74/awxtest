@@ -1,12 +1,79 @@
 ---
-- name: Remove ACI EPG
+- name: Create ACI TN AP EPG 
   hosts: "aci"
   gather_facts: no
-  vars:
-    state: absent  # Set the state variable to "absent" or "present" as needed
 
   tasks:
-    - name: Remove EPG
+    - name: Create Tenant
+      aci_tenant:
+        host: "{{ ansible_host }}"
+        use_ssl: yes
+        validate_certs: false
+        username: "{{ ansible_user }}"
+        password: "{{ ansible_password }}"
+        tenant: "{{ tenant_name }}"
+        description: "{{ description }}"
+        state: "{{ action }}"
+      register: result
+
+    - name: Display the result
+      debug:
+        var: result
+        
+    - name: Create Application profile
+      aci_ap:
+        host: "{{ ansible_host }}"
+        use_ssl: yes
+        validate_certs: false
+        username: "{{ ansible_user }}"
+        password: "{{ ansible_password }}"
+        tenant: "{{ tenant_name }}"
+        ap: "{{ ap_name }}"
+        description: "{{ description }}"
+        state: "{{ action }}"
+      register: result
+    - name: Display the result
+      debug:
+        var: result
+
+    - name: Create BD
+      aci_bd:
+        host: "{{ ansible_host }}"
+        use_ssl: yes
+        validate_certs: false
+        username: "{{ ansible_user }}"
+        password: "{{ ansible_password }}"
+        tenant: "{{ tenant_name }}"
+        bd: "{{ bd_name }}"
+        description: "{{ description }}"
+        state: "{{ action }}"
+      register: result
+      
+    - name: Display the result
+      debug:
+        var: result
+
+    - name: Create BD Subnet
+      aci_bd_subnet:
+        host: "{{ ansible_host }}"
+        use_ssl: yes
+        validate_certs: false
+        username: "{{ ansible_user }}"
+        password: "{{ ansible_password }}"
+        tenant: "{{ tenant_name }}"
+        bd: "{{ bd_name }}"
+        gateway: "{{ gateway}}"
+        mask: "{{ mask }}"
+        description: "{{ description }}"
+        state: "{{ action }}"
+      register: result
+      
+    - name: Display the result
+      debug:
+        var: result
+
+
+    - name: Create EPG
       aci_epg:
         host: "{{ ansible_host }}"
         use_ssl: yes
@@ -16,54 +83,34 @@
         tenant: "{{ tenant_name }}"
         ap: "{{ ap_name }}"
         epg: "{{ epg_name }}"
-        state: "{{ state }}"
-      register: epg_result
-
-    - name: Display the result
-      debug:
-        var: epg_result
-
-    - name: Check if the Application Profile is empty
-      aci_ap:
-        host: "{{ ansible_host }}"
-        use_ssl: yes
-        validate_certs: false
-        username: "{{ ansible_user }}"
-        password: "{{ ansible_password }}"
-        tenant: "{{ tenant_name }}"
-        ap: "{{ ap_name }}"
-      register: ap_result
-      ignore_errors: yes
-
-    - name: Remove Application Profile if it's empty
-      when: ap_result is succeeded
-      aci_ap:
-        host: "{{ ansible_host }}"
-        use_ssl: yes
-        validate_certs: false
-        username: "{{ ansible_user }}"
-        password: "{{ ansible_password }}"
-        tenant: "{{ tenant_name }}"
-        ap: "{{ ap_name }}"
-        state: "{{ state }}"
-      register: ap_removal_result
-
-    - name: Display the result
-      debug:
-        var: ap_removal_result
-
-    - name: Remove BD
-      aci_bd:
-        host: "{{ ansible_host }}"
-        use_ssl: yes
-        validate_certs: false
-        username: "{{ ansible_user }}"
-        password: "{{ ansible_password }}"
-        tenant: "{{ tenant_name }}"
         bd: "{{ bd_name }}"
-        state: "{{ state }}"
-      register: bd_result
+        description: "{{ description }}"
+        preferred_group: true
+        state: "{{ action }}"
+      register: result
 
     - name: Display the result
       debug:
-        var: bd_result
+        var: result
+
+    - name: Add Domain to EPG
+      aci_epg_to_domain:
+        host: "{{ ansible_host }}"
+        use_ssl: yes
+        validate_certs: false
+        username: "{{ ansible_user }}"
+        password: "{{ ansible_password }}"
+        tenant: "{{ tenant_name }}"
+        ap: "{{ ap_name }}"
+        epg: "{{ epg_name }}"
+        domain: vm1
+        domain_type: vmm
+        vm_provider : vmware
+        resolution_immediacy: immediate
+        deploy_immediacy : immediate
+        state: "{{ action }}"
+      register: result
+
+    - name: Display the result
+      debug:
+        var: result
