@@ -66,7 +66,7 @@
         limit_ip_learn : true                   #        "limitIpLearnToSubnets": "yes",
 #        mac_addres                             #        "mac": "00:22:BD:F8:19:FF",## The APIC defaults to 00:22:BD:F8:19:FF when unset during creation.
         multi_dest: "bd-flood"                  #        "multiDstPktAct": "bd-flood",
-        vrf: "tenand_id_dc>"                    #       child fvRsCtx
+        vrf: "1"                    #       child fvRsCtx
                                                         #"fvRsCtx": {
                                                         #  "attributes": {
                                                         #       "annotation": "",
