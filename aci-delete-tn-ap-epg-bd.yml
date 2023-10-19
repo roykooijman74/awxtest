@@ -42,6 +42,11 @@
       debug:
         var: epg_result
 
+    - name: Ensure epg_list is available
+      set_fact:
+        epg_list: []
+
+
     - name: Get a list of EPGs in the Application Profile
       aci_epg:
         host: "{{ ansible_host }}"
