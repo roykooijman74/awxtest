@@ -60,7 +60,7 @@
         enable_routing : true                   #        "unicastRoute": "yes",
                                                 #        "hostBasedRouting": "no",
         ip_learning: true                       #        "ipLearning": "yes",
-        ipv6_l3_unknown_multicast : "flood"     #        "v6unkMcastAct": "flood",
+#2.7.0        ipv6_l3_unknown_multicast : "flood"     #        "v6unkMcastAct": "flood",
         l2_unknown_unicast : "proxy"            #        "unkMacUcastAct": "proxy",
         l3_unknown_multicast: "flood"           #        "unkMcastAct": "flood",
         limit_ip_learn : true                   #        "limitIpLearnToSubnets": "yes",
