@@ -92,3 +92,22 @@
     - name: Display the result
       debug:
         var: result
+
+    - name: Add Domain to EPG
+      aci_epg_to_domain:
+        host: "{{ ansible_host }}"
+        use_ssl: yes
+        validate_certs: false
+        username: "{{ ansible_user }}"
+        password: "{{ ansible_password }}"
+        tenant: "{{ tenant_name }}"
+        ap: "{{ ap_name }}"
+        epg: "{{ epg_name }}"
+        domain: vm1
+        domain_type: vmm
+        state: "{{ action }}"
+      register: result
+
+    - name: Display the result
+      debug:
+        var: result
