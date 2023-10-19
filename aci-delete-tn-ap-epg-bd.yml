@@ -5,6 +5,23 @@
   vars:
     state: absent  # Set the state variable to "absent" or "present" as needed
 
+
+    - name: Remove BD
+      aci_bd:
+        host: "{{ ansible_host }}"
+        use_ssl: yes
+        validate_certs: false
+        username: "{{ ansible_user }}"
+        password: "{{ ansible_password }}"
+        tenant: "{{ tenant_name }}"
+        bd: "{{ bd_name }}"
+        state: "{{ state }}"
+      register: bd_result
+
+    - name: Display the result
+      debug:
+        var: bd_result
+
   tasks:
     - name: Remove EPG
       aci_epg:
@@ -74,18 +91,3 @@
       debug:
         var: ap_result
 
-    - name: Remove BD
-      aci_bd:
-        host: "{{ ansible_host }}"
-        use_ssl: yes
-        validate_certs: false
-        username: "{{ ansible_user }}"
-        password: "{{ ansible_password }}"
-        tenant: "{{ tenant_name }}"
-        bd: "{{ bd_name }}"
-        state: "{{ state }}"
-      register: bd_result
-
-    - name: Display the result
-      debug:
-        var: bd_result
