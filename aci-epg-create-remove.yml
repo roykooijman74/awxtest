@@ -16,7 +16,6 @@
         epg: "{{ epg_name }}"
         bd: "{{ bd_name }}"
         description: "{{ epg_description }}"
-        monitoring_policy: default
         preferred_group: true
         state: "{{ action }}"
       register: result
