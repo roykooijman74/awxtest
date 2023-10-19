@@ -32,7 +32,6 @@
         password: "{{ ansible_password }}"
         tenant: "{{ tenant_name }}"
         ap: "{{ ap_name }}"
-        epg: "{{ epg_name }}"
       register: epg_list
       ignore_errors: yes
 
