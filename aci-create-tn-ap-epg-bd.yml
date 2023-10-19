@@ -3,7 +3,6 @@
   hosts: "aci"
   gather_facts: no
 
----
   tasks:
     - name: Create Tenant
       aci_tenant:
@@ -70,8 +69,6 @@
     - name: Display the result
       debug:
         var: result
-
-
 
     - name: Create EPG
       aci_epg:
