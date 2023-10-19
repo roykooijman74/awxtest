@@ -57,8 +57,7 @@
 
     - name: Display the result
       debug:
-        var: epg_list
-
+        var: epg_list 
 
     - name: Count child EPGs in the registered list
       set_fact:
