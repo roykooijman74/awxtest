@@ -6,6 +6,7 @@
     state: absent  # Set the state variable to "absent" or "present" as needed
 
 
+  tasks:
     - name: Remove BD
       aci_bd:
         host: "{{ ansible_host }}"
@@ -22,7 +23,8 @@
       debug:
         var: bd_result
 
-  tasks:
+
+
     - name: Remove EPG
       aci_epg:
         host: "{{ ansible_host }}"
