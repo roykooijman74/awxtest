@@ -60,7 +60,7 @@
         var: epg_list
 
 
-   - name: Count child EPGs in the registered list
+    - name: Count child EPGs in the registered list
       set_fact:
         child_epgs_count: "{{ epg_list.results | list | length }}"
 
