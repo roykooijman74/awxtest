@@ -73,3 +73,22 @@
         var: result
 
 
+    - name: Create EPG
+      aci_epg:
+        host: "{{ ansible_host }}"
+        use_ssl: yes
+        validate_certs: false
+        username: "{{ ansible_user }}"
+        password: "{{ ansible_password }}"
+        tenant: "{{ tenant_name }}"
+        ap: "{{ ap_name }}"
+        epg: "{{ epg_name }}"
+        bd: "{{ bd_name }}"
+        description: "{{ description }}"
+        preferred_group: true
+        state: "{{ action }}"
+      register: result
+
+    - name: Display the result
+      debug:
+        var: result
