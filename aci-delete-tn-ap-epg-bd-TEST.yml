@@ -51,10 +51,45 @@
         password: "{{ ansible_password }}"
         tenant: "{{ tenant_name }}"
         ap: "{{ ap_name }}"
-        state: query
       register: epg_list
       ignore_errors: yes
+      when: epg_result.changed  # Check if the specific EPG was removed
 
     - name: Display the result
       debug:
         var: epg_list
+
+    - name: Remove other EPGs in the Application Profile (if any)
+      aci_epg:
+        host: "{{ ansible_host }}"
+        use_ssl: yes
+        validate_certs: false
+        username: "{{ ansible_user }}"
+        password: "{{ ansible_password }}"
+        tenant: "{{ tenant_name }}"
+        ap: "{{ ap_name }}"
+        epg: "{{ item.name }}"
+        state: "{{ state }}"
+      with_items: "{{ epg_list.results }}"
+      when: item.name != "{{ epg_name }}"
+
+    - name: Display the result
+      debug:
+        var: epg_result
+
+    - name: Remove AP if no other EPGs left
+      aci_ap:
+        host: "{{ ansible_host }}"
+        use_ssl: yes
+        validate_certs: false
+        username: "{{ ansible_user }}"
+        password: "{{ ansible_password }}"
+        tenant: "{{ tenant_name }}"
+        ap: "{{ ap_name }}"
+        state: "{{ state }}"
+      when: epg_list.results | selectattr('state', 'eq', 'absent') | list | length == 0
+
+    - name: Display the result
+      debug:
+        var: ap_result
+
