@@ -68,7 +68,7 @@
       set_fact:
 #        child_epgs_count: "{{ epg_list | list | length }}"
 #        child_epgs_count: "{{ epg_list.fvAp[0].children | selectattr('fvAEPg.0.state', 'eq', 'absent') | list | length }}"
-        child_epgs_count: "{{ epg_list['imdata'] | map(attribute='fvAEPg') | list | selectattr('attributes.state', 'eq', 'absent') | list | length }}"
+        child_epgs_count: "{{ epg_list['fvAp']['children'][fvAEPg][name] |list | length }}"
 
       
 
