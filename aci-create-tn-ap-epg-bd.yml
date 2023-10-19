@@ -105,6 +105,8 @@
         epg: "{{ epg_name }}"
         domain: vm1
         domain_type: vmm
+        vm_provider : vmware
+        resolution_immediacy: immediate
         state: "{{ action }}"
       register: result
 
