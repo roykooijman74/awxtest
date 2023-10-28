@@ -3,7 +3,7 @@
   hosts: "aci"
   gather_facts: no
   vars:
-    state: absent  # Set the state variable to "absent" or "present" as needed
+    state: absent  #  Set the state variable to "absent" or "present" as needed
 
 
   tasks:
