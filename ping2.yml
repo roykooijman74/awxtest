@@ -1,9 +1,0 @@
-# ping2.yml
----
-- name: Ping a remote server
-  hosts: all
-  tasks:
-    - name: Ping the server
-      ping:
-    - name: Ping the server again
-      ping:
